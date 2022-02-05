@@ -1,6 +1,7 @@
 <template>
   <div class="login-container">
-    <vue-friendly-iframe class="login-form" :src="loginUrl" scroll="auto" />
+    <!--<vue-friendly-iframe class="login-form" src="loginUrl" scroll="auto" />-->
+    <button @click="login">Login</button>
   </div>
 </template>
 
@@ -26,8 +27,8 @@ export default {
     }
     return {
       // loginUrl: 'https://gutian-uat.portal.tencentciam.com',
-      loginUrl: 'https://gutian-uat.portal.tencentciam.com/oauth2/authorize?scope=openid&client_id=M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE&redirect_uri=http%3A%2F%2Fwww.kornsweets.com&response_type=code&state=MOCK_STATE',
-      // loginUrl: 'https://www.google.com',
+      // loginUrl: 'https://gutian-uat.portal.tencentciam.com/oauth2/authorize?scope=openid&client_id=M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE&redirect_uri=http%3A%2F%2Fwww.kornsweets.com&response_type=code&state=MOCK_STATE',
+      loginUrl: 'https://gutian-uat.portal.tencentciam.com/oauth2/authorize?scope=openid&client_id=M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE&redirect_uri=http%3A%2F%2F172.17.68.181%3A9527%2Fvue-element-admin%2Fuser%2Flogin&response_type=code&state=MOCK_STATE',
       loginForm: {
         username: '',
         password: ''
@@ -51,6 +52,9 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
+    login() {
+      window.location.href = this.loginUrl
+    },
     checkCapslock(e) {
       const { key } = e
       this.capsTooltip = key && key.length === 1 && (key >= 'A' && key <= 'Z')
