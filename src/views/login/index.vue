@@ -2,6 +2,7 @@
   <div class="login-container">
     <!--<vue-friendly-iframe class="login-form" src="loginUrl" scroll="auto" />-->
     <button @click="login">Login</button>
+    <button @click="logout">Logout</button>
   </div>
 </template>
 
@@ -29,6 +30,7 @@ export default {
       // loginUrl: 'https://gutian-uat.portal.tencentciam.com',
       // loginUrl: 'https://gutian-uat.portal.tencentciam.com/oauth2/authorize?scope=openid&client_id=M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE&redirect_uri=http%3A%2F%2Fwww.kornsweets.com&response_type=code&state=MOCK_STATE',
       loginUrl: 'https://gutian-uat.portal.tencentciam.com/oauth2/authorize?scope=openid&client_id=M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE&redirect_uri=http%3A%2F%2F172.17.68.181%3A9527%2Fvue-element-admin%2Fuser%2Flogin&response_type=code&state=MOCK_STATE',
+      logoutUrl: 'https://gutian-uat.portal.tencentciam.com/logout?client_id=M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE',
       loginForm: {
         username: '',
         password: ''
@@ -54,6 +56,9 @@ export default {
   methods: {
     login() {
       window.location.href = this.loginUrl
+    },
+    logout() {
+      window.location.href = this.logoutUrl
     },
     checkCapslock(e) {
       const { key } = e

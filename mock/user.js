@@ -1,3 +1,4 @@
+const { default: Axios } = require("axios")
 
 const tokens = {
   admin: {
@@ -29,11 +30,30 @@ module.exports = [
     url: '/vue-element-admin/user/login',
     type: 'post',
     response: config => {
-      const { username } = config.body
-      const token = tokens[username]
+      const query = config.query
+      var code = query['code']
+      Axios.post(
+        'https://gutian-uat.portal.tencentciam.com/oauth2/token',
+        {
+          client_id: 'M2IyOGVhN2E5ZDViNDA4OGJiYzZkMzhkZDNkMjUxOTE',
+          client_secret: 'StAAtc25FRDl0hFMT/12D899IgkbCHyI',
+          grant_type: 'authorization_code',
+          code: code,
+          redirect_uri: '/'
+        }
+      ).then(
+        response => {
+          this.$store.commit('SET_TOKEN', response.data.access_token)
+          this.$store.commit('SET_TOKEN', response.data.access_token)
+        }
+      ).catch(
+        error => {
+          console.log(error)
+        }
+      )
 
       // mock error
-      if (!token) {
+      if (!this.$store.state.token) {
         return {
           code: 60204,
           message: 'Account and password are incorrect.'
@@ -42,7 +62,7 @@ module.exports = [
 
       return {
         code: 20000,
-        data: token
+        data: this.$store.state.token
       }
     }
   },
